@@ -26,6 +26,7 @@
 
   function submit() {
     console.log("Please wait");
+    console.log("Current note size is ", notes.length);
     setTimeout(() => {
       if (note.description === "") {
         note.description = lorem.generateParagraphs(6);
