@@ -1,19 +1,12 @@
 <script lang="ts">
-  import "../app.css";
-  type Notebook = {
-    readonly id: number;
-    readonly name: string;
-  };
+  import moment from "moment";
+  import { notes } from "../data/note";
 
-  let notebooks: Notebook[] = [];
+  // Reactive
+  $: notes;
 
-  function generateRandom() {
-    const randomId = Math.floor(Math.random() * 100);
-    const data: Notebook = {
-      id: randomId,
-      name: "Test " + randomId,
-    };
-    notebooks = [...notebooks, data];
+  function formatDate(date: Date) {
+    return moment().format("LLL");
   }
 </script>
 
@@ -25,15 +18,21 @@
       is not possible by You, but God can make it happen to you if you try hard
       as possible""
     </blockquote>
+
     <!-- <div>Here are list you can build</div> -->
-    <button
-      on:click={generateRandom}
-      class="p-2 border border-black rounded active:bg-gray-200"
-      >Generate Random</button
-    >
-    <div>
-      {#each notebooks as nb}
-        <p class="m-2">{nb.name}</p>
+    <div class="container mx-auto w-1/2 text-left">
+      <h1 class="my-5 text-2xl font-medium">My Wishlist</h1>
+      {#each notes as nb}
+        <div class="border border-black rounded p-3">
+          <div class="flex flex-row justify-between">
+            <p>{nb.name}</p>
+            <p class="flex-shrink-0 font-bold self-center">
+              {formatDate(nb.updateAt)}
+            </p>
+          </div>
+          <hr class="my-2" />
+          <p>{nb.description}</p>
+        </div>
       {/each}
     </div>
   </div>

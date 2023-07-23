@@ -1,4 +1,5 @@
-<nav>
-  <a href="/">Home</a>
-</nav>
+<script>
+  import "../app.css";
+</script>
+
 <slot />
